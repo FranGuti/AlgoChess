@@ -18,7 +18,7 @@ import java.util.HashMap;
 
 public class TableroInterfaz {
 
-    public int tamanioCasillero = 30;
+    public int tamanioCasillero = 37;
     public  int filas = 20;
     public  int columnas = 20;
     private  Group grupoCasilleros = new Group();

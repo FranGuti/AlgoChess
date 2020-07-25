@@ -66,7 +66,7 @@ public class FaseJuego {
         cambiarLadoDerechoInterfaz(ladoDerecho);
         cambiarLadoIzquierdoInterfaz(ladoIzquierdo);
 
-        Scene scene = new Scene(interfasJuego,950,700);
+        Scene scene = new Scene(interfasJuego,1200,780);
 
         ventana.setScene(scene);
         ventana.show();
@@ -91,6 +91,7 @@ public class FaseJuego {
 
         mensajeDeError = new Label();
         vBox.getChildren().addAll(turnoDe,puntosDisponibles,mensajeDeError);
+        vBox.setPrefWidth(200);
         return vBox;
     }
 
@@ -101,10 +102,10 @@ public class FaseJuego {
         unidadesDisponibles.setTextFill(Color.web("#ff0000", 0.8));
 
         Button crearSoldado = new Button("Crear Soldado");
-        crearSoldado.setOnAction( e -> new CrearUnidad("soldado",juego,tableroInterfaz,this, "imagenes/soldado4.jpg","imagenes/soldado3.jpg", "src/main/resources/sonidos/SoldadoCreacion.mp3"));
+        crearSoldado.setOnAction( e -> new CrearUnidad("soldado",juego,tableroInterfaz,this, "imagenes/soldado4.png","imagenes/soldado3.png", "src/main/resources/sonidos/SoldadoCreacion.mp3"));
 
         Button crearJinete = new Button("Crear Jinete");
-        crearJinete.setOnAction( e -> new CrearUnidad("jinete",juego,tableroInterfaz, this, "imagenes/jinete3der.jpg", "imagenes/jinete3ladoizq.jpg","src/main/resources/sonidos/caballeroCreacion.mp3"));
+        crearJinete.setOnAction( e -> new CrearUnidad("jinete",juego,tableroInterfaz, this, "imagenes/jinete3der.png", "imagenes/jinete3ladoizq.png","src/main/resources/sonidos/caballeroCreacion.mp3"));
 
         Button crearCurandero = new Button("Crear Curandero");
         crearCurandero.setOnAction( e -> new CrearUnidad("curandero",juego,tableroInterfaz, this, "imagenes/curandero2.png", "imagenes/curandero.png","src/main/resources/sonidos/curanderoCreacion.mp3"));
@@ -165,6 +166,28 @@ public class FaseJuego {
     }
 
     public void cambiarMensajeError(String error){
+
+        int len = error.length();
+        if(len > 30){
+            char[] errorFiltrado = new char[len+2];
+            for(int i = 0; i < len; i++){
+                if( i == len/2){
+                    errorFiltrado[i] = '\n';
+                }
+                if( i == len/2 + 1){
+                    errorFiltrado[i] = '-';
+                }
+                if( i < len/2) {
+                    errorFiltrado[i] = error.charAt(i);
+                }
+                else{
+                    errorFiltrado[i+2] = error.charAt(i);
+                }
+            }
+            error = String.valueOf(errorFiltrado);
+        }
+
+
         mensajeDeError.setText(error);
     }
 
